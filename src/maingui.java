@@ -60,11 +60,19 @@ public class maingui {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1067, 844);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{1030, 0};
+		gridBagLayout.rowHeights = new int[]{783, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(11, 11, 1030, 783);
-		frame.getContentPane().add(splitPane);
+		GridBagConstraints gbc_splitPane = new GridBagConstraints();
+		gbc_splitPane.fill = GridBagConstraints.BOTH;
+		gbc_splitPane.gridx = 0;
+		gbc_splitPane.gridy = 0;
+		frame.getContentPane().add(splitPane, gbc_splitPane);
 		
 		JPanel panel = new JPanel();
 		splitPane.setLeftComponent(panel);
