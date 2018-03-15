@@ -253,6 +253,11 @@ public class maingui {
 		chooseData_Modelling_Time.setText("800");
 		panel.add(chooseData_Modelling_Time);
 		
+		ChooseData chsdtTesterCount = new ChooseData();
+		chsdtTesterCount.setTitle("Tester count");
+		chsdtTesterCount.setText("3");
+		panel.add(chsdtTesterCount);
+		
 	}
 	public Diagram getDiagram_Testing_Order() {
 		return diagram_Testing_Order;
