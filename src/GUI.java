@@ -19,7 +19,7 @@ import java.awt.Font;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 
-public class maingui {
+public class GUI {
 //test
 	private JFrame frame;
 	private Diagram diagram_Testing_Order;
@@ -29,6 +29,7 @@ public class maingui {
 	private JCheckBox CheckBoxConcole;
 	private JButton buttonTest;
 	private Diagram diagram_Fails;
+	private ChooseData chsdtTesterCount;
 
 	/**
 	 * Launch the application.
@@ -37,7 +38,7 @@ public class maingui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					maingui window = new maingui();
+					GUI window = new GUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +50,7 @@ public class maingui {
 	/**
 	 * Create the application.
 	 */
-	public maingui() {
+	public GUI() {
 		initialize();
 	}
 
@@ -253,7 +254,7 @@ public class maingui {
 		chooseData_Modelling_Time.setText("800");
 		panel.add(chooseData_Modelling_Time);
 		
-		ChooseData chsdtTesterCount = new ChooseData();
+		chsdtTesterCount = new ChooseData();
 		chsdtTesterCount.setTitle("Tester count");
 		chsdtTesterCount.setText("3");
 		panel.add(chsdtTesterCount);
@@ -279,5 +280,8 @@ public class maingui {
 	}
 	public Diagram getDiagram_Fails() {
 		return diagram_Fails;
+	}
+	public ChooseData getChsdtTesterCount() {
+		return chsdtTesterCount;
 	}
 }

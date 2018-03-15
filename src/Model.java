@@ -5,21 +5,23 @@ import process.MultiActor;
 import process.QueueForTransactions;
 import stat.DiscretHisto;
 import stat.Histo;
-import sun.nio.cs.Surrogate.Generator;
+import widgets.ChooseData;
 
 public class Model {
 	//Посилання на диспетчера
 		private Dispatcher dispatcher;
 		//Посилання на візуальну частину
-		private maingui gui;
+		private GUI gui;
 		
 		////////Актори\\\\\\\\\
 		// Генератор транзакцій
 		private Generator generator;
-		// Обслуговуючий прилад
-		private Device device;		
+		// Checker
+		private Checker checker;		
 		//Бригада обслуговуючих пристроїв
-		private MultiActor multiDevice;
+		private MultiActor multiFixer;
+		//Packer
+		private Packer packer;
 		
 		/////////Черги\\\\\\\\\
 		// Черга транзакцій
@@ -57,21 +59,25 @@ public class Model {
 			}
 			return generator;
 		}
-		public Device getDevice() {
-			if (device == null) {
-				device = new Device("Device", gui, this);
-				device.setHistoForActorWaitingTime(getHistoWaitDevice());
+		public Checker getChecker() {
+			if (checker == null) {
+				checker = new Checker("Device", gui, this);
+				checker.setHistoForActorWaitingTime(getHistoWaitDevice());
 			}
-			return device;
+			return checker;
+		}
+		private Object getHistoWaitDevice() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		public MultiActor getMultiDevice() {
-			if (multiDevice == null) { 	
-				multiDevice = new MultiActor();
-				multiDevice.setNameForProtocol("MultiActor для бригади пристроїв");
-				multiDevice.setOriginal(getDevice());
-				multiDevice.setNumberOfClones(gui.getChooseDataNdevice().getInt());
+			if (multiFixer == null) { 	
+				multiFixer = new MultiActor();
+				multiFixer.setNameForProtocol("MultiActor для бригади пристроїв");
+				multiFixer.setOriginal(getChecker());
+				multiFixer.setNumberOfClones(gui.getChsdtTesterCount().getInt());
 			}
-			return multiDevice;
+			return multiFixer;
 		}
 		public QueueForTransactions<Transaction> getQueue() {
 			if (queue == null) {
@@ -88,9 +94,11 @@ public class Model {
 		}
 		public void initForTest() {
 			// Передаємо чергам painter-ів для динамічної індикації
-			getQueue().setPainter(gui.getDiagramQueue().getPainter());
+			getQueue().setPainter(gui.getDiagram_Testing_Order().getPainter());
+			getQueue().setPainter(gui.getDiagram_Fixing_Order().getPainter());
+			getQueue().setPainter(gui.getDiagram_Packing_Order().getPainter());
 			//Налаштовуємо можливість виведення протоколу на консоль
-			if (gui.getJCheckBox().isSelected())
+			if (gui.getCheckBoxConcole().isSelected())
 				dispatcher.setProtocolFileName("Console");
 			else
 				dispatcher.setProtocolFileName("");
