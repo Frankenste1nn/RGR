@@ -1,0 +1,18 @@
+1.PC generator
+2.PC tester(s)
+3.PC fixer
+4.PC packer
+
+random:
+1.PC creation time
+2.Testing time
+3.Fixing time
+4.Packing time
+
+data:
+1.Testing places
+2.Box count
+3.Fixing places
+4.Fail chance
+5.Modeling time
+6.Tester count
