@@ -58,7 +58,7 @@ public class maingui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1067, 844);
+		frame.setBounds(100, 100, 913, 474);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{1030, 0};
@@ -206,7 +206,7 @@ public class maingui {
 				diagram_Testing_Order.setVerticalMaxText(chooseData_Testing_Places.getText());
 			}
 		});
-		chooseData_Testing_Places.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		chooseData_Testing_Places.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Testing_Places.setTitle("Testing Places");
 		chooseData_Testing_Places.setText("10");
 		panel.add(chooseData_Testing_Places);
@@ -217,7 +217,7 @@ public class maingui {
 				diagram_Packing_Order.setVerticalMaxText(chooseData_Box_Count.getText());
 			}
 		});
-		chooseData_Box_Count.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		chooseData_Box_Count.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Box_Count.setTitle("Box Count");
 		chooseData_Box_Count.setText("100");
 		panel.add(chooseData_Box_Count);
@@ -228,13 +228,13 @@ public class maingui {
 				diagram_Fixing_Order.setVerticalMaxText(chooseData_Fixing_Places.getText());
 			}
 		});
-		chooseData_Fixing_Places.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		chooseData_Fixing_Places.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Fixing_Places.setTitle("Fixing Places");
 		chooseData_Fixing_Places.setText("8");
 		panel.add(chooseData_Fixing_Places);
 		
 		ChooseData chooseData_fail_chance = new ChooseData();
-		chooseData_fail_chance.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		chooseData_fail_chance.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_fail_chance.setText("0.5");
 		chooseData_fail_chance.setTitle("Fail Chance");
 		panel.add(chooseData_fail_chance);
@@ -248,7 +248,7 @@ public class maingui {
 				diagram_Testing_Order.setHorizontalMaxText(chooseData_Modelling_Time.getText());
 			}
 		});
-		chooseData_Modelling_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		chooseData_Modelling_Time.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Modelling_Time.setTitle("Modelling Time");
 		chooseData_Modelling_Time.setText("800");
 		panel.add(chooseData_Modelling_Time);
