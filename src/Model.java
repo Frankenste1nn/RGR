@@ -50,7 +50,7 @@ public class Model {
 		public void componentsToStartList() {
 			// Передаємо акторів диспетчеру
 			dispatcher.addStartingActor(getGenerator());
-			dispatcher.addStartingActor(getMultiDevice());
+			dispatcher.addStartingActor(getMultiFixer());
 		}
 
 		public Generator getGenerator() {
@@ -70,7 +70,7 @@ public class Model {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		public MultiActor getMultiDevice() {
+		public MultiActor getMultiFixer() {
 			if (multiFixer == null) { 	
 				multiFixer = new MultiActor();
 				multiFixer.setNameForProtocol("MultiActor для бригади пристроїв");
