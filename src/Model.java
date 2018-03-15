@@ -11,7 +11,7 @@ public class Model {
 	//Посилання на диспетчера
 		private Dispatcher dispatcher;
 		//Посилання на візуальну частину
-		private GUI gui;
+		private maingui gui;
 		
 		////////Актори\\\\\\\\\
 		// Генератор транзакцій
