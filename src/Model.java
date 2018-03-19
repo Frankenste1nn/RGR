@@ -76,8 +76,8 @@ public class Model {
 			return checker;
 		}
 		private Object getHistoWaitDevice() {
-			// TODO Auto-generated method stub
-			return null;
+			
+			return histoWaitDevice;
 		}
 		public MultiActor getMultiFixer() {
 			if (multiFixer == null) { 	
