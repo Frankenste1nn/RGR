@@ -23,6 +23,12 @@ public class Model {
 		//Packer
 		private Packer packer;
 		
+		/**
+		 * @return the packer
+		 */
+		public Packer getPacker() {
+			return packer;
+		}
 		/////////Черги\\\\\\\\\
 		// Черга транзакцій
 		private QueueForTransactions<Transaction> queue;
@@ -49,8 +55,11 @@ public class Model {
 		}
 		public void componentsToStartList() {
 			// Передаємо акторів диспетчеру
+			// TODO добавить всех актеров и разобрать с мульти
 			dispatcher.addStartingActor(getGenerator());
 			dispatcher.addStartingActor(getMultiFixer());
+			dispatcher.addStartingActor(getChecker());
+			dispatcher.addStartingActor(getPacker());
 		}
 
 		public Generator getGenerator() {
