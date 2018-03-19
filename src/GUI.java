@@ -17,7 +17,15 @@ import javax.swing.JCheckBox;
 import widgets.Diagram;
 import java.awt.Font;
 import javax.swing.event.CaretListener;
+
+import process.Dispatcher;
+import process.IModelFactory;
+
 import javax.swing.event.CaretEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI {
 //test
@@ -30,6 +38,7 @@ public class GUI {
 	private JButton buttonTest;
 	private Diagram diagram_Fails;
 	private ChooseData chsdtTesterCount;
+	private ChooseData chooseData_Modelling_Time;
 
 	/**
 	 * Launch the application.
@@ -92,6 +101,12 @@ public class GUI {
 		panelTZ.setLayout(gbl_panelTZ);
 		
 		panelTest = new JPanel();
+		panelTest.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				getChooseData_Modelling_Time().select(0, 0);
+			}
+		});
 		tabbedPane.addTab("Test", null, panelTest, null);
 		GridBagLayout gbl_panelTest = new GridBagLayout();
 		gbl_panelTest.columnWidths = new int[]{0, 0, 0};
@@ -141,6 +156,11 @@ public class GUI {
 		panelTest.add(diagram_Fails, gbc_diagram_Fails);
 		
 		buttonTest = new JButton("Test");
+		buttonTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				startTest();
+			}
+		});
 		GridBagConstraints gbc_buttonTest = new GridBagConstraints();
 		gbc_buttonTest.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonTest.gridx = 0;
@@ -240,7 +260,7 @@ public class GUI {
 		chooseData_fail_chance.setTitle("Fail Chance");
 		panel.add(chooseData_fail_chance);
 		
-		ChooseData chooseData_Modelling_Time = new ChooseData();
+		chooseData_Modelling_Time = new ChooseData();
 		chooseData_Modelling_Time.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				diagram_Fails.setHorizontalMaxText(chooseData_Modelling_Time.getText());
@@ -283,5 +303,25 @@ public class GUI {
 	}
 	public ChooseData getChsdtTesterCount() {
 		return chsdtTesterCount;
+	}
+	public ChooseData getChooseData_Modelling_Time() {
+		return chooseData_Modelling_Time;
+	}
+
+	private void startTest() {
+		getDiagram_Fails().clear();
+		getDiagram_Fixing_Order().clear();
+		getDiagram_Packing_Order().clear();
+		getDiagram_Testing_Order().clear();
+		
+		Dispatcher dispatcher = new Dispatcher();
+		IModelFactory factory = (d)->new Model(d, this);
+		Model model = (Model)factory.createModel(dispatcher);
+		
+		getButtonTest().setEnabled(false);
+		dispatcher.addDispatcherFinishListener(
+				()->getButtonTest().setEnabled(true));
+		model.initForTest();
+		dispatcher.start();
 	}
 }
