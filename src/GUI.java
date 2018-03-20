@@ -20,6 +20,9 @@ import javax.swing.event.CaretListener;
 
 import process.Dispatcher;
 import process.IModelFactory;
+import rnd.Erlang;
+import rnd.Negexp;
+import rnd.Norm;
 
 import javax.swing.event.CaretEvent;
 import java.awt.event.ComponentAdapter;
@@ -205,22 +208,22 @@ public class GUI {
 		chooseRandom_PC_Creation_time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_PC_Creation_time.setTitle("PC Creation Time");
 		panel.add(chooseRandom_PC_Creation_time);
-		
+		chooseRandom_PC_Creation_time.setRandom(new Negexp(1));
 		ChooseRandom chooseRandom_Testing_Time = new ChooseRandom();
 		chooseRandom_Testing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Testing_Time.setTitle("Testing Time");
 		panel.add(chooseRandom_Testing_Time);
-		
+		chooseRandom_Testing_Time.setRandom(new Erlang(4,2));
 		ChooseRandom chooseRandom_Fixing_Time = new ChooseRandom();
 		chooseRandom_Fixing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Fixing_Time.setTitle("Fixing Time");
 		panel.add(chooseRandom_Fixing_Time);
-		
+		chooseRandom_Fixing_Time.setRandom(new Norm(2,0.4));
 		ChooseRandom chooseRandom_Packing_Time = new ChooseRandom();
 		chooseRandom_Packing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Packing_Time.setTitle("Packing Time");
 		panel.add(chooseRandom_Packing_Time);
-		
+		chooseRandom_Packing_Time.setRandom(new Negexp(1));
 		ChooseData chooseData_Testing_Places = new ChooseData();
 		chooseData_Testing_Places.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
