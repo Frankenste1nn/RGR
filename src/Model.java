@@ -27,6 +27,8 @@ public class Model {
 		 * @return the packer
 		 */
 		public Packer getPacker() {
+			if(packer == null)
+				packer = new Packer("Packer", gui, this);
 			return packer;
 		}
 		/////////Черги\\\\\\\\\
@@ -70,7 +72,7 @@ public class Model {
 		}
 		public Checker getChecker() {
 			if (checker == null) {
-				checker = new Checker("Device", gui, this);
+				checker = new Checker("Checker", gui, this);
 				checker.setHistoForActorWaitingTime(getHistoWaitDevice());
 			}
 			return checker;
