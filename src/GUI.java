@@ -42,6 +42,10 @@ public class GUI {
 	private Diagram diagram_Fails;
 	private ChooseData chsdtTesterCount;
 	private ChooseData chooseData_Modelling_Time;
+	private ChooseRandom chooseRandom_PC_Creation_time;
+	private ChooseRandom chooseRandom_Packing_Time;
+	private ChooseRandom chooseRandom_Fixing_Time;
+	private ChooseRandom chooseRandom_Testing_Time;
 
 	/**
 	 * Launch the application.
@@ -204,22 +208,22 @@ public class GUI {
 		panelTrans.setLayout(gbl_panelTrans);
 		splitPane.setDividerLocation(300);
 		
-		ChooseRandom chooseRandom_PC_Creation_time = new ChooseRandom();
+		chooseRandom_PC_Creation_time = new ChooseRandom();
 		chooseRandom_PC_Creation_time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_PC_Creation_time.setTitle("PC Creation Time");
 		panel.add(chooseRandom_PC_Creation_time);
 		chooseRandom_PC_Creation_time.setRandom(new Negexp(1));
-		ChooseRandom chooseRandom_Testing_Time = new ChooseRandom();
+		chooseRandom_Testing_Time = new ChooseRandom();
 		chooseRandom_Testing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Testing_Time.setTitle("Testing Time");
 		panel.add(chooseRandom_Testing_Time);
 		chooseRandom_Testing_Time.setRandom(new Erlang(4,2));
-		ChooseRandom chooseRandom_Fixing_Time = new ChooseRandom();
+		chooseRandom_Fixing_Time = new ChooseRandom();
 		chooseRandom_Fixing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Fixing_Time.setTitle("Fixing Time");
 		panel.add(chooseRandom_Fixing_Time);
 		chooseRandom_Fixing_Time.setRandom(new Norm(2,0.4));
-		ChooseRandom chooseRandom_Packing_Time = new ChooseRandom();
+		chooseRandom_Packing_Time = new ChooseRandom();
 		chooseRandom_Packing_Time.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		chooseRandom_Packing_Time.setTitle("Packing Time");
 		panel.add(chooseRandom_Packing_Time);
@@ -326,5 +330,17 @@ public class GUI {
 				()->getButtonTest().setEnabled(true));
 		model.initForTest();
 		dispatcher.start();
+	}
+	public ChooseRandom getChooseRandom_PC_Creation_time() {
+		return chooseRandom_PC_Creation_time;
+	}
+	public ChooseRandom getChooseRandom_Packing_Time() {
+		return chooseRandom_Packing_Time;
+	}
+	public ChooseRandom getChooseRandom_Fixing_Time() {
+		return chooseRandom_Fixing_Time;
+	}
+	public ChooseRandom getChooseRandom_Testing_Time() {
+		return chooseRandom_Testing_Time;
 	}
 }

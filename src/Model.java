@@ -1,5 +1,6 @@
 package src;
 
+import process.Actor;
 import process.Dispatcher;
 import process.MultiActor;
 import process.QueueForTransactions;
@@ -19,9 +20,11 @@ public class Model {
 		// Checker
 		private Checker checker;		
 		//Бригада обслуговуючих пристроїв
-		private MultiActor multiFixer;
+		private MultiActor multiChecker
+		;
 		//Packer
 		private Packer packer;
+		private Fixer fixer;
 		
 		/**
 		 * @return the packer
@@ -33,7 +36,7 @@ public class Model {
 		}
 		/////////Черги\\\\\\\\\
 		// Черга транзакцій
-		private QueueForTransactions<Transaction> queue;
+		private QueueForTransactions<PC> queue;
 		
 		/////////Гістограми\\\\\\\\\\\\
 		// Гістограма для довжини черги
@@ -59,11 +62,17 @@ public class Model {
 			// Передаємо акторів диспетчеру
 			// TODO добавить всех актеров и разобрать с мульти
 			dispatcher.addStartingActor(getGenerator());
-			dispatcher.addStartingActor(getMultiFixer());
-			dispatcher.addStartingActor(getChecker());
+			dispatcher.addStartingActor(getMultiChecker());
+			dispatcher.addStartingActor(getFixer());
 			dispatcher.addStartingActor(getPacker());
 		}
 
+		private Actor getFixer() {
+			if (fixer == null) {
+				fixer = new Fixer("Fixer", gui, this);
+			}
+			return fixer;
+		}
 		public Generator getGenerator() {
 			if (generator == null) {
 				generator = new Generator("Generator", gui, this);
@@ -81,16 +90,16 @@ public class Model {
 			
 			return histoWaitDevice;
 		}
-		public MultiActor getMultiFixer() {
-			if (multiFixer == null) { 	
-				multiFixer = new MultiActor();
-				multiFixer.setNameForProtocol("MultiActor для бригади пристроїв");
-				multiFixer.setOriginal(getChecker());
-				multiFixer.setNumberOfClones(gui.getChsdtTesterCount().getInt());
+		public MultiActor getMultiChecker() {
+			if (multiChecker == null) { 	
+				multiChecker = new MultiActor();
+				multiChecker.setNameForProtocol("MultiActor для бригади пристроїв");
+				multiChecker.setOriginal(getChecker());
+				multiChecker.setNumberOfClones(gui.getChsdtTesterCount().getInt());
 			}
-			return multiFixer;
+			return multiChecker;
 		}
-		public QueueForTransactions<Transaction> getQueue() {
+		public QueueForTransactions<PC> getQueue() {
 			if (queue == null) {
 				queue = new QueueForTransactions<>("Queue", dispatcher,
 						getDiscretHistoQueue());
