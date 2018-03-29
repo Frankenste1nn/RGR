@@ -122,7 +122,7 @@ public class Model {
 		
 		public QueueForTransactions<PC> getPQueue() {
 			if (p_queue == null) {
-				p_queue = new QueueForTransactions<>("Fixing Queue", dispatcher,
+				p_queue = new QueueForTransactions<>("Packing Queue", dispatcher,
 						getDiscretHistoPQueue());
 			}
 			return p_queue;
