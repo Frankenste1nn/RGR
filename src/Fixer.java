@@ -12,7 +12,7 @@ public class Fixer extends Actor {
 	@Override
 	protected void rule() throws DispatcherFinishException {
 		// TODO Auto-generated method stub
-
+		System.out.println(this.getNameForProtocol()+"я запрацював");
 	}
 
 }

@@ -37,12 +37,17 @@ public class Model {
 		/////////Черги\\\\\\\\\
 		// Черга транзакцій
 		private QueueForTransactions<PC> queue;
+		private QueueForTransactions<PC> f_queue;
+		private QueueForTransactions<PC> p_queue;
 		
 		/////////Гістограми\\\\\\\\\\\\
 		// Гістограма для довжини черги
 		private DiscretHisto discretHistoQueue;
+		private DiscretHisto discretHistoFQueue;
+		private DiscretHisto discretHistoPQueue;
 		// Гістограма для часу перебування у черзі
 		private Histo histoTransactionWaitInQueue;
+		private Histo histoTransactionWaitInFQueue;
 		// Гістограма для часу обслуговування
 		private Histo histoTransactionServiceTime;
 		// Гістограма для часу чекання Device
@@ -86,7 +91,7 @@ public class Model {
 			}
 			return checker;
 		}
-		private Object getHistoWaitDevice() {
+		public Object getHistoWaitDevice() {
 			
 			return histoWaitDevice;
 		}
@@ -106,17 +111,50 @@ public class Model {
 			}
 			return queue;
 		}
+	
+		public QueueForTransactions<PC> getFQueue() {
+			if (f_queue == null) {
+				f_queue = new QueueForTransactions<>("Fixing Queue", dispatcher,
+						getDiscretHistoFQueue());
+			}
+			return f_queue;
+		}
+		
+		public QueueForTransactions<PC> getPQueue() {
+			if (p_queue == null) {
+				p_queue = new QueueForTransactions<>("Fixing Queue", dispatcher,
+						getDiscretHistoPQueue());
+			}
+			return p_queue;
+		}
+		
 		public DiscretHisto getDiscretHistoQueue() {
 			if (discretHistoQueue == null) {
 				discretHistoQueue = new DiscretHisto();
 			}
 			return discretHistoQueue;
 		}
+		
+		public DiscretHisto getDiscretHistoFQueue() {
+			if (discretHistoFQueue == null) {
+				discretHistoFQueue = new DiscretHisto();
+			}
+			return discretHistoFQueue;
+		}
+		
+		public DiscretHisto getDiscretHistoPQueue() {
+			if (discretHistoPQueue == null) {
+				discretHistoPQueue = new DiscretHisto();
+			}
+			return discretHistoPQueue;
+		}
+		
 		public void initForTest() {
 			// Передаємо чергам painter-ів для динамічної індикації
 			getQueue().setPainter(gui.getDiagram_Testing_Order().getPainter());
-			getQueue().setPainter(gui.getDiagram_Fixing_Order().getPainter());
-			getQueue().setPainter(gui.getDiagram_Packing_Order().getPainter());
+			getFQueue().setPainter(gui.getDiagram_Fixing_Order().getPainter());
+			getPQueue().setPainter(gui.getDiagram_Packing_Order().getPainter());
+			
 			//Налаштовуємо можливість виведення протоколу на консоль
 			if (gui.getCheckBoxConcole().isSelected())
 				dispatcher.setProtocolFileName("Console");

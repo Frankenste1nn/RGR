@@ -26,8 +26,9 @@ public class Generator extends Actor{
 					" created transaction.");
 			ChooseRandom d = new ChooseRandom();
 			d.setRandom(new Norm(2,0.4));
-			//TODO SDELAT
-			PC pc = new PC(true);
+			double n = d.next();
+			PC tr = new PC(n > gui.getChooseData_fail_chance().getDouble(), model);
+			dispatcher.addStartingActor(tr);
 		}
 	}
 

@@ -46,6 +46,7 @@ public class GUI {
 	private ChooseRandom chooseRandom_Packing_Time;
 	private ChooseRandom chooseRandom_Fixing_Time;
 	private ChooseRandom chooseRandom_Testing_Time;
+	private ChooseData chooseData_fail_chance;
 
 	/**
 	 * Launch the application.
@@ -261,7 +262,7 @@ public class GUI {
 		chooseData_Fixing_Places.setText("8");
 		panel.add(chooseData_Fixing_Places);
 		
-		ChooseData chooseData_fail_chance = new ChooseData();
+		chooseData_fail_chance = new ChooseData();
 		chooseData_fail_chance.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_fail_chance.setText("0.5");
 		chooseData_fail_chance.setTitle("Fail Chance");
@@ -342,5 +343,8 @@ public class GUI {
 	}
 	public ChooseRandom getChooseRandom_Testing_Time() {
 		return chooseRandom_Testing_Time;
+	}
+	public ChooseData getChooseData_fail_chance() {
+		return chooseData_fail_chance;
 	}
 }
