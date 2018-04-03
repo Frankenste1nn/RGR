@@ -39,7 +39,6 @@ public class GUI {
 	private Diagram diagram_Fixing_Order;
 	private JCheckBox CheckBoxConcole;
 	private JButton buttonTest;
-	private Diagram diagram_Fails;
 	private ChooseData chsdtTesterCount;
 	private ChooseData chooseData_Modelling_Time;
 	private ChooseRandom chooseRandom_PC_Creation_time;
@@ -153,16 +152,6 @@ public class GUI {
 		gbc_diagram_Packing_Order.gridy = 2;
 		panelTest.add(diagram_Packing_Order, gbc_diagram_Packing_Order);
 		
-		diagram_Fails = new Diagram();
-		diagram_Fails.setTitleText("Fails");
-		GridBagConstraints gbc_diagram_Fails = new GridBagConstraints();
-		gbc_diagram_Fails.gridwidth = 2;
-		gbc_diagram_Fails.insets = new Insets(0, 0, 5, 5);
-		gbc_diagram_Fails.fill = GridBagConstraints.BOTH;
-		gbc_diagram_Fails.gridx = 0;
-		gbc_diagram_Fails.gridy = 3;
-		panelTest.add(diagram_Fails, gbc_diagram_Fails);
-		
 		buttonTest = new JButton("Test");
 		buttonTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -271,7 +260,6 @@ public class GUI {
 		chooseData_Modelling_Time = new ChooseData();
 		chooseData_Modelling_Time.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
-				diagram_Fails.setHorizontalMaxText(chooseData_Modelling_Time.getText());
 				diagram_Fixing_Order.setHorizontalMaxText(chooseData_Modelling_Time.getText());
 				diagram_Packing_Order.setHorizontalMaxText(chooseData_Modelling_Time.getText());
 				diagram_Testing_Order.setHorizontalMaxText(chooseData_Modelling_Time.getText());
@@ -306,9 +294,6 @@ public class GUI {
 	public JButton getButtonTest() {
 		return buttonTest;
 	}
-	public Diagram getDiagram_Fails() {
-		return diagram_Fails;
-	}
 	public ChooseData getChsdtTesterCount() {
 		return chsdtTesterCount;
 	}
@@ -317,7 +302,6 @@ public class GUI {
 	}
 
 	private void startTest() {
-		getDiagram_Fails().clear();
 		getDiagram_Fixing_Order().clear();
 		getDiagram_Packing_Order().clear();
 		getDiagram_Testing_Order().clear();
