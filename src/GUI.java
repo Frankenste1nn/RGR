@@ -75,7 +75,7 @@ public class GUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 913, 611);
+		frame.setBounds(100, 100, 951, 726);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{1030, 0};
@@ -117,9 +117,9 @@ public class GUI {
 		tabbedPane.addTab("Test", null, panelTest, null);
 		GridBagLayout gbl_panelTest = new GridBagLayout();
 		gbl_panelTest.columnWidths = new int[]{0, 0, 0};
-		gbl_panelTest.rowHeights = new int[]{0, 0, 0, -45, 0, 0};
+		gbl_panelTest.rowHeights = new int[]{0, 0, 0, 36, 0};
 		gbl_panelTest.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelTest.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelTest.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		panelTest.setLayout(gbl_panelTest);
 		
 		diagram_Testing_Order = new Diagram();
@@ -159,17 +159,17 @@ public class GUI {
 			}
 		});
 		GridBagConstraints gbc_buttonTest = new GridBagConstraints();
-		gbc_buttonTest.anchor = GridBagConstraints.NORTH;
+		gbc_buttonTest.fill = GridBagConstraints.VERTICAL;
 		gbc_buttonTest.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonTest.gridx = 0;
-		gbc_buttonTest.gridy = 4;
+		gbc_buttonTest.gridy = 3;
 		panelTest.add(buttonTest, gbc_buttonTest);
 		
 		CheckBoxConcole = new JCheckBox("Console Logging");
 		GridBagConstraints gbc_CheckBoxConcole = new GridBagConstraints();
-		gbc_CheckBoxConcole.anchor = GridBagConstraints.NORTH;
+		gbc_CheckBoxConcole.fill = GridBagConstraints.VERTICAL;
 		gbc_CheckBoxConcole.gridx = 1;
-		gbc_CheckBoxConcole.gridy = 4;
+		gbc_CheckBoxConcole.gridy = 3;
 		panelTest.add(CheckBoxConcole, gbc_CheckBoxConcole);
 		
 		JPanel panelStat = new JPanel();
