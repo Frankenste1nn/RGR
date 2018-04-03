@@ -14,6 +14,7 @@ public class Checker extends Actor {
 	private QueueForTransactions<PC> p_queue;
 	private Randomable rnd;
 	private double finishTime;
+	private GUI gui;
 
 	public Checker(String name, GUI gui, Model model) {
 		setNameForProtocol(name);
@@ -22,6 +23,7 @@ public class Checker extends Actor {
 		queue = model.getQueue();
 		f_queue = model.getFQueue();
 		p_queue = model.getPQueue();
+		this.gui = gui;
 	}
 
 	public void setHistoForActorWaitingTime(Object histoWaitDevice) {
@@ -35,11 +37,20 @@ public class Checker extends Actor {
 			waitForCondition(queueSize, "у черзі має з'явиться транзакція");
 			PC transaction = queue.removeFirst();
 			holdForTime(rnd.next());
+			
 			if(transaction.isBroken()) {
+				BooleanSupplier queueReady = () -> f_queue.size() < gui.getChooseData_Fixing_Places().getInt();
+				waitForCondition(queueReady, "fixing queue is full watiting....");
 				f_queue.add(transaction);
 			} else 
+			{
+				BooleanSupplier queueReady = () -> p_queue.size() < gui.getChooseData_Box_Count().getInt();
+				waitForCondition(queueReady, "packing queue is full watiting....");
 				p_queue.add(transaction);
-		}
+			}
+			}
+			
+			
 	}
 
 }

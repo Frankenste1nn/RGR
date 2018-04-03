@@ -40,9 +40,12 @@ public class Fixer extends Actor {
 			double n = Math.random();
 			
 			if(!(n > gui.getChooseData_fail_chance().getDouble())) {
-				f_queue.add(transaction);
-			} else 
+			
+			} else {
+				BooleanSupplier queueReady = () -> p_queue.size() < gui.getChooseData_Box_Count().getInt();
+				waitForCondition(queueReady, "packing queue is full watiting....");
 				p_queue.add(transaction);
+			}
 		}
 		System.out.println(this.getNameForProtocol()+"я запрацював");
 	}
