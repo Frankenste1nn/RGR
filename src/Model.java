@@ -1,5 +1,7 @@
 package src;
 
+import java.awt.Color;
+
 import process.Actor;
 import process.Dispatcher;
 import process.MultiActor;
@@ -151,6 +153,9 @@ public class Model {
 		
 		public void initForTest() {
 			// Передаємо чергам painter-ів для динамічної індикації
+			gui.getDiagram_Testing_Order().getPainter().setColor(Color.BLUE);
+			gui.getDiagram_Fixing_Order().getPainter().setColor(Color.BLUE);
+			gui.getDiagram_Packing_Order().getPainter().setColor(Color.BLUE);
 			getQueue().setPainter(gui.getDiagram_Testing_Order().getPainter());
 			getFQueue().setPainter(gui.getDiagram_Fixing_Order().getPainter());
 			getPQueue().setPainter(gui.getDiagram_Packing_Order().getPainter());
