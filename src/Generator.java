@@ -27,7 +27,7 @@ public class Generator extends Actor{
 			ChooseRandom d = new ChooseRandom();
 			d.setRandom(new Norm(1,0.4));
 			double n = d.next();
-			System.out.println("Pc fail chance"+(n));
+			System.out.println("Pc fail chance "+(n));
 			PC tr = new PC(!(n > gui.getChooseData_fail_chance().getDouble()), model);
 			dispatcher.addStartingActor(tr);
 		}
