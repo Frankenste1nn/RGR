@@ -20,6 +20,8 @@ public class Checker extends Actor {
 		finishTime = gui.getChooseData_Modelling_Time().getDouble();
 		rnd = gui.getChooseRandom_Testing_Time();
 		queue = model.getQueue();
+		f_queue = model.getFQueue();
+		p_queue = model.getPQueue();
 	}
 
 	public void setHistoForActorWaitingTime(Object histoWaitDevice) {
