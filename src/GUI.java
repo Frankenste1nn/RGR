@@ -46,6 +46,9 @@ public class GUI {
 	private ChooseRandom chooseRandom_Fixing_Time;
 	private ChooseRandom chooseRandom_Testing_Time;
 	private ChooseData chooseData_fail_chance;
+	private ChooseData chooseData_Fixing_Places;
+	private ChooseData chooseData_Box_Count;
+	private ChooseData chooseData_Testing_Places;
 
 	/**
 	 * Launch the application.
@@ -220,7 +223,7 @@ public class GUI {
 		chooseRandom_Packing_Time.setTitle("Packing Time");
 		panel.add(chooseRandom_Packing_Time);
 		chooseRandom_Packing_Time.setRandom(new Negexp(1));
-		ChooseData chooseData_Testing_Places = new ChooseData();
+		chooseData_Testing_Places = new ChooseData();
 		chooseData_Testing_Places.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				diagram_Testing_Order.setVerticalMaxText(chooseData_Testing_Places.getText());
@@ -231,7 +234,7 @@ public class GUI {
 		chooseData_Testing_Places.setText("10");
 		panel.add(chooseData_Testing_Places);
 		
-		ChooseData chooseData_Box_Count = new ChooseData();
+		chooseData_Box_Count = new ChooseData();
 		chooseData_Box_Count.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				diagram_Packing_Order.setVerticalMaxText(chooseData_Box_Count.getText());
@@ -242,7 +245,7 @@ public class GUI {
 		chooseData_Box_Count.setText("100");
 		panel.add(chooseData_Box_Count);
 		
-		ChooseData chooseData_Fixing_Places = new ChooseData();
+		chooseData_Fixing_Places = new ChooseData();
 		chooseData_Fixing_Places.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent e) {
 				diagram_Fixing_Order.setVerticalMaxText(chooseData_Fixing_Places.getText());
@@ -332,5 +335,14 @@ public class GUI {
 	}
 	public ChooseData getChooseData_fail_chance() {
 		return chooseData_fail_chance;
+	}
+	public ChooseData getChooseData_Fixing_Places() {
+		return chooseData_Fixing_Places;
+	}
+	public ChooseData getChooseData_Box_Count() {
+		return chooseData_Box_Count;
+	}
+	public ChooseData getChooseData_Testing_Places() {
+		return chooseData_Testing_Places;
 	}
 }
