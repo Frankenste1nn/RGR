@@ -36,8 +36,8 @@ public class Fixer extends Actor {
 			holdForTime(rnd.next());
 			
 			ChooseRandom d = new ChooseRandom();
-			d.setRandom(new Norm(1,0.4));
-			double n = d.next();
+			
+			double n = Math.random();
 			
 			if(!(n > gui.getChooseData_fail_chance().getDouble())) {
 				f_queue.add(transaction);
