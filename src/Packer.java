@@ -34,12 +34,6 @@ public class Packer extends Actor {
 			PC transaction = p_queue.removeFirst();
 			holdForTime(rnd.next());
 			transaction.setServiceDone(true);
-			if (p_queue.size() >= gui.getChooseData_Box_Count().getInt()) {
-				while (p_queue.size() != 0) {
-					p_queue.removeFirst();
-				}
-				holdForTime(rnd.next());
-			}
 		}
 
 	}

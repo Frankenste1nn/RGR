@@ -23,6 +23,7 @@ public class Model {
 	private Checker checker;
 	// Бригада обслуговуючих пристроїв
 	private MultiActor multiChecker;
+	private MultiActor multiPacker;
 	// Packer
 	private Packer packer;
 	private Fixer fixer;
@@ -73,7 +74,7 @@ public class Model {
 		dispatcher.addStartingActor(getGenerator());
 		dispatcher.addStartingActor(getMultiChecker());
 		dispatcher.addStartingActor(getFixer());
-		dispatcher.addStartingActor(getPacker());
+		dispatcher.addStartingActor(getMultiPacker());
 	}
 
 	private Actor getFixer() {
@@ -112,7 +113,18 @@ public class Model {
 		}
 		return multiChecker;
 	}
-
+	
+	public MultiActor getMultiPacker() {
+		if (multiPacker == null) {
+			multiPacker = new MultiActor();
+			multiPacker.setNameForProtocol("MultiActor packer");
+			multiPacker.setOriginal(getPacker());
+			multiPacker.setNumberOfClones(gui.getChooseDataPackers().getInt());
+		}
+		
+		return multiPacker;
+ 	}
+	
 	public QueueForTransactions<PC> getQueue() {
 		if (queue == null) {
 			queue = new QueueForTransactions<>("Queue", dispatcher, getDiscretHistoQueue());

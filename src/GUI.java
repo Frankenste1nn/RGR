@@ -49,6 +49,7 @@ public class GUI {
 	private ChooseData chooseData_Fixing_Places;
 	private ChooseData chooseData_Box_Count;
 	private ChooseData chooseData_Testing_Places;
+	private ChooseData chooseDataPackers;
 
 	/**
 	 * Launch the application.
@@ -274,6 +275,11 @@ public class GUI {
 		chooseData_Modelling_Time.setTitle("Modelling Time");
 		chooseData_Modelling_Time.setText("800");
 		panel.add(chooseData_Modelling_Time);
+		
+		chooseDataPackers = new ChooseData();
+		chooseDataPackers.setTitle("Packers");
+		chooseDataPackers.setText("2");
+		panel.add(chooseDataPackers);
 
 		chsdtTesterCount = new ChooseData();
 		chsdtTesterCount.setTitle("Tester count");
@@ -359,5 +365,8 @@ public class GUI {
 
 	public ChooseData getChooseData_Testing_Places() {
 		return chooseData_Testing_Places;
+	}
+	public ChooseData getChooseDataPackers() {
+		return chooseDataPackers;
 	}
 }
