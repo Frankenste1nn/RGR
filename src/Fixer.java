@@ -15,6 +15,7 @@ public class Fixer extends Actor {
 	private double finishTime;
 	private ChooseRandom rnd;
 	private GUI gui;
+
 	public Fixer(String string, GUI gui, Model model) {
 		// TODO Auto-generated constructor stub
 		setNameForProtocol(string);
@@ -25,7 +26,7 @@ public class Fixer extends Actor {
 		p_queue = model.getPQueue();
 		this.gui = gui;
 	}
-	
+
 	@Override
 	protected void rule() throws DispatcherFinishException {
 		// TODO Auto-generated method stub
@@ -34,20 +35,19 @@ public class Fixer extends Actor {
 			waitForCondition(queueSize, "у черзі має з'явиться транзакція");
 			PC transaction = f_queue.removeFirst();
 			holdForTime(rnd.next());
-			
+
 			ChooseRandom d = new ChooseRandom();
-			
+
 			double n = Math.random();
-			
-			if(!(n > gui.getChooseData_fail_chance().getDouble())) {
-			
+
+			if (!(n > gui.getChooseData_fail_chance().getDouble())) {
+
 			} else {
 				BooleanSupplier queueReady = () -> p_queue.size() < gui.getChooseData_Box_Count().getInt();
 				waitForCondition(queueReady, "packing queue is full watiting....");
 				p_queue.add(transaction);
 			}
 		}
-		System.out.println(this.getNameForProtocol()+"я запрацював");
 	}
 
 }

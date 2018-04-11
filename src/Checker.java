@@ -37,20 +37,18 @@ public class Checker extends Actor {
 			waitForCondition(queueSize, "у черзі має з'явиться транзакція");
 			PC transaction = queue.removeFirst();
 			holdForTime(rnd.next());
-			
-			if(transaction.isBroken()) {
+
+			if (transaction.isBroken()) {
 				BooleanSupplier queueReady = () -> f_queue.size() < gui.getChooseData_Fixing_Places().getInt();
 				waitForCondition(queueReady, "fixing queue is full watiting....");
 				f_queue.add(transaction);
-			} else 
-			{
+			} else {
 				BooleanSupplier queueReady = () -> p_queue.size() < gui.getChooseData_Box_Count().getInt();
 				waitForCondition(queueReady, "packing queue is full watiting....");
 				p_queue.add(transaction);
 			}
-			}
-			
-			
+		}
+
 	}
 
 }

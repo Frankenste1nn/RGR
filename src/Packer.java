@@ -28,12 +28,18 @@ public class Packer extends Actor {
 	@Override
 	protected void rule() throws DispatcherFinishException {
 		BooleanSupplier queueSize = () -> p_queue.size() > 0;
+
 		while (getDispatcher().getCurrentTime() <= finishTime) {
 			waitForCondition(queueSize, "у черзі має з'явиться транзакція");
 			PC transaction = p_queue.removeFirst();
 			holdForTime(rnd.next());
-
-			System.out.println(this.getNameForProtocol() + "я запрацював");
+			transaction.setServiceDone(true);
+			if (p_queue.size() >= gui.getChooseData_Box_Count().getInt()) {
+				while (p_queue.size() != 0) {
+					p_queue.removeFirst();
+				}
+				holdForTime(rnd.next());
+			}
 		}
 
 	}
