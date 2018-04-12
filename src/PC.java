@@ -50,11 +50,15 @@ public class PC extends Actor {
 	protected void rule() throws DispatcherFinishException {
 		createTime = dispatcher.getCurrentTime();
 		nameForProtocol = "Транзакція " + createTime;
-		waitForCondition(() -> queue.size() < queueSize, "Have place");
+		//waitForCondition(() -> queue.size() < queueSize, "Have place");
 		queue.add(this);
-		waitForCondition(() -> !queue.contains(this), "мають забрати на обслуговування");
-		histoQueue.add(dispatcher.getCurrentTime() - createTime);
+		//waitForCondition(() -> !queue.contains(this), "мають забрати на обслуговування");
+		//histoQueue.add(dispatcher.getCurrentTime() - createTime);
 		waitForCondition(() -> serviceDone, "мають завершити обслуговування");
+		if(histoService == null)
+			System.out.println("histoService = null");
+		if(dispatcher == null)
+			System.out.println("dispatcher = null");
 		histoService.add(dispatcher.getCurrentTime() - createTime);
 	}
 

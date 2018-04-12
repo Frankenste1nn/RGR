@@ -54,7 +54,7 @@ public class Model {
 	// Гістограма для часу обслуговування
 	private Histo histoTransactionServiceTime;
 	// Гістограма для часу чекання Device
-	private Histo histoWaitDevice;
+	private Histo histoWaitDevice = new Histo();
 
 	public Model(Dispatcher d, GUI g) {
 		if (d == null || g == null) {
