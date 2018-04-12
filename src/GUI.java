@@ -29,6 +29,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.CardLayout;
+import widgets.stat.StatisticsManager;
 
 public class GUI {
 	// test
@@ -50,6 +52,8 @@ public class GUI {
 	private ChooseData chooseData_Box_Count;
 	private ChooseData chooseData_Testing_Places;
 	private ChooseData chooseDataPackers;
+	private StatisticsManager statisticsManager;
+	private IModelFactory factory;
 
 	/**
 	 * Launch the application.
@@ -178,12 +182,11 @@ public class GUI {
 
 		JPanel panelStat = new JPanel();
 		tabbedPane.addTab("Stat", null, panelStat, null);
-		GridBagLayout gbl_panelStat = new GridBagLayout();
-		gbl_panelStat.columnWidths = new int[] { 0 };
-		gbl_panelStat.rowHeights = new int[] { 0 };
-		gbl_panelStat.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panelStat.rowWeights = new double[] { Double.MIN_VALUE };
-		panelStat.setLayout(gbl_panelStat);
+		panelStat.setLayout(new CardLayout(0, 0));
+		
+		statisticsManager = new StatisticsManager();
+		panelStat.add(statisticsManager, "name_44252682083523");
+		statisticsManager.setFactory((d) -> new Model(d, this));
 
 		JPanel panelRegres = new JPanel();
 		tabbedPane.addTab("Regres", null, panelRegres, null);
@@ -326,7 +329,7 @@ public class GUI {
 		getDiagram_Testing_Order().clear();
 
 		Dispatcher dispatcher = new Dispatcher();
-		IModelFactory factory = (d) -> new Model(d, this);
+		factory = (d) -> new Model(d, this);
 		Model model = (Model) factory.createModel(dispatcher);
 
 		getButtonTest().setEnabled(false);
@@ -368,5 +371,12 @@ public class GUI {
 	}
 	public ChooseData getChooseDataPackers() {
 		return chooseDataPackers;
+	}
+	public StatisticsManager getStatisticsManager() {
+		return statisticsManager;
+	}
+	
+	public IModelFactory getFactory() {
+		return factory;
 	}
 }

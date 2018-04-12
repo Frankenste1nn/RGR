@@ -1,16 +1,21 @@
 package src;
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 import process.Actor;
 import process.Dispatcher;
+import process.IModelFactory;
 import process.MultiActor;
 import process.QueueForTransactions;
 import stat.DiscretHisto;
 import stat.Histo;
+import stat.IHisto;
 import widgets.ChooseData;
+import widgets.stat.IStatisticsable;
 
-public class Model {
+public class Model implements IStatisticsable{
 	// Посилання на диспетчера
 	private Dispatcher dispatcher;
 	// Посилання на візуальну частину
@@ -34,6 +39,7 @@ public class Model {
 	public Packer getPacker() {
 		if (packer == null)
 			packer = new Packer("Packer", gui, this);
+		packer.setHistoForActorWaitingTime(getHistoTransactionWaitInPQueue());
 		return packer;
 	}
 
@@ -50,11 +56,35 @@ public class Model {
 	private DiscretHisto discretHistoPQueue;
 	// Гістограма для часу перебування у черзі
 	private Histo histoTransactionWaitInQueue;
+	private Histo histoTransactionWaitInPQueue;
+	public Histo getHistoTransactionWaitInPQueue() {
+		if(histoTransactionWaitInPQueue == null)
+			histoTransactionWaitInPQueue = new Histo();
+		return histoTransactionWaitInPQueue;
+	}
+
+	public Histo getHistoTransactionWaitInQueue() {
+		if(histoTransactionWaitInQueue == null)
+			histoTransactionWaitInQueue = new Histo();
+		return histoTransactionWaitInQueue;
+	}
+
+	public Histo getHistoTransactionWaitInFQueue() {
+		if(histoTransactionWaitInFQueue == null)
+			histoTransactionWaitInFQueue = new Histo();
+		return histoTransactionWaitInFQueue;
+	}
+
+	public Histo getHistoTransactionServiceTime() {
+		if(histoTransactionServiceTime == null)
+			histoTransactionServiceTime = new Histo();
+		return histoTransactionServiceTime;
+	}
 	private Histo histoTransactionWaitInFQueue;
 	// Гістограма для часу обслуговування
 	private Histo histoTransactionServiceTime;
 	// Гістограма для часу чекання Device
-	private Histo histoWaitDevice = new Histo();
+	private Histo histoWaitDevice;
 
 	public Model(Dispatcher d, GUI g) {
 		if (d == null || g == null) {
@@ -80,6 +110,7 @@ public class Model {
 	private Actor getFixer() {
 		if (fixer == null) {
 			fixer = new Fixer("Fixer", gui, this);
+			fixer.setHistoForActorWaitingTime(getHistoTransactionWaitInFQueue());
 		}
 		return fixer;
 	}
@@ -87,6 +118,7 @@ public class Model {
 	public Generator getGenerator() {
 		if (generator == null) {
 			generator = new Generator("Generator", gui, this);
+			//generator.setHistoForActorWaitingTime(waitingTimeHisto);
 		}
 		return generator;
 	}
@@ -94,13 +126,14 @@ public class Model {
 	public Checker getChecker() {
 		if (checker == null) {
 			checker = new Checker("Checker", gui, this);
-			checker.setHistoForActorWaitingTime(getHistoWaitDevice());
+			checker.setHistoForActorWaitingTime(getHistoTransactionWaitInQueue());
 		}
 		return checker;
 	}
 
 	public Object getHistoWaitDevice() {
-
+		if(histoWaitDevice == null)
+			histoWaitDevice = new Histo();
 		return histoWaitDevice;
 	}
 
@@ -181,6 +214,25 @@ public class Model {
 			dispatcher.setProtocolFileName("Console");
 		else
 			dispatcher.setProtocolFileName("");
+	}
+
+	@Override
+	public Map<String, IHisto> getStatistics() {
+		//gui.getStatisticsManager().setFactory(gui.getFactory());
+		Map<String, IHisto> map = new HashMap<>();
+		map.put("Test queue", discretHistoQueue);
+		map.put("Fix queue", discretHistoFQueue);
+		map.put("Pack queue", discretHistoPQueue);
+		map.put("Test waiting", histoTransactionWaitInQueue);
+		map.put("Fix waiting", histoTransactionWaitInFQueue);
+		map.put("Pack waiting", histoTransactionWaitInPQueue);
+		map.put("Service", histoWaitDevice);
+		return map;
+	}
+
+	@Override
+	public void initForStatistics() {
+		
 	}
 
 }
