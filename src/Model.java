@@ -13,9 +13,10 @@ import stat.DiscretHisto;
 import stat.Histo;
 import stat.IHisto;
 import widgets.ChooseData;
+import widgets.experiments.IExperimentable;
 import widgets.stat.IStatisticsable;
 
-public class Model implements IStatisticsable{
+public class Model implements IStatisticsable, IExperimentable{
 	// Посилання на диспетчера
 	private Dispatcher dispatcher;
 	// Посилання на візуальну частину
@@ -233,6 +234,18 @@ public class Model implements IStatisticsable{
 	@Override
 	public void initForStatistics() {
 		
+	}
+
+	@Override
+	public void initForExperiment(double factor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<String, Double> getResultOfExperiment() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

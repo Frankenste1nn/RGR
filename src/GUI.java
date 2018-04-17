@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import widgets.stat.StatisticsManager;
+import widgets.experiments.ExperimentManager;
 
 public class GUI {
 	// test
@@ -54,6 +55,7 @@ public class GUI {
 	private ChooseData chooseDataPackers;
 	private StatisticsManager statisticsManager;
 	private IModelFactory factory;
+	private ExperimentManager experimentManager;
 
 	/**
 	 * Launch the application.
@@ -133,7 +135,7 @@ public class GUI {
 		diagram_Testing_Order = new Diagram();
 		diagram_Testing_Order.setTitleText("Testing Order");
 		GridBagConstraints gbc_diagram_Testing_Order = new GridBagConstraints();
-		gbc_diagram_Testing_Order.fill = GridBagConstraints.HORIZONTAL;
+		gbc_diagram_Testing_Order.fill = GridBagConstraints.BOTH;
 		gbc_diagram_Testing_Order.gridwidth = 2;
 		gbc_diagram_Testing_Order.insets = new Insets(0, 0, 5, 0);
 		gbc_diagram_Testing_Order.gridx = 0;
@@ -190,12 +192,12 @@ public class GUI {
 
 		JPanel panelRegres = new JPanel();
 		tabbedPane.addTab("Regres", null, panelRegres, null);
-		GridBagLayout gbl_panelRegres = new GridBagLayout();
-		gbl_panelRegres.columnWidths = new int[] { 0 };
-		gbl_panelRegres.rowHeights = new int[] { 0 };
-		gbl_panelRegres.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panelRegres.rowWeights = new double[] { Double.MIN_VALUE };
-		panelRegres.setLayout(gbl_panelRegres);
+		panelRegres.setLayout(new CardLayout(0, 0));
+		
+		experimentManager = new ExperimentManager();
+		experimentManager.getChooseDataFactors().setText("2 3 4 5 6");
+		experimentManager.getChooseDataFactors().setTitle("Tester count");
+		panelRegres.add(experimentManager, "name_72131731077853");
 
 		JPanel panelTrans = new JPanel();
 		tabbedPane.addTab("Transient", null, panelTrans, null);
@@ -235,7 +237,7 @@ public class GUI {
 		});
 		chooseData_Testing_Places.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Testing_Places.setTitle("Testing Places");
-		chooseData_Testing_Places.setText("10");
+		chooseData_Testing_Places.setText("40");
 		panel.add(chooseData_Testing_Places);
 
 		chooseData_Box_Count = new ChooseData();
@@ -257,7 +259,7 @@ public class GUI {
 		});
 		chooseData_Fixing_Places.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		chooseData_Fixing_Places.setTitle("Fixing Places");
-		chooseData_Fixing_Places.setText("8");
+		chooseData_Fixing_Places.setText("20");
 		panel.add(chooseData_Fixing_Places);
 
 		chooseData_fail_chance = new ChooseData();
@@ -286,7 +288,7 @@ public class GUI {
 
 		chsdtTesterCount = new ChooseData();
 		chsdtTesterCount.setTitle("Tester count");
-		chsdtTesterCount.setText("3");
+		chsdtTesterCount.setText("5");
 		panel.add(chsdtTesterCount);
 
 	}
