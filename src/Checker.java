@@ -26,9 +26,9 @@ public class Checker extends Actor {
 		this.gui = gui;
 	}
 
-	public void setHistoForActorWaitingTime(Object histoWaitDevice) {
-
-	}
+	/*public void setHistoForActorWaitingTime(Object histoWaitDevice) {
+		
+	}*/
 
 	@Override
 	protected void rule() throws DispatcherFinishException {

@@ -6,13 +6,11 @@ import java.util.Map;
 
 import process.Actor;
 import process.Dispatcher;
-import process.IModelFactory;
 import process.MultiActor;
 import process.QueueForTransactions;
 import stat.DiscretHisto;
 import stat.Histo;
 import stat.IHisto;
-import widgets.ChooseData;
 import widgets.experiments.IExperimentable;
 import widgets.stat.IStatisticsable;
 
@@ -101,7 +99,6 @@ public class Model implements IStatisticsable, IExperimentable{
 
 	public void componentsToStartList() {
 		// Передаємо акторів диспетчеру
-		// TODO добавить всех актеров и разобрать с мульти
 		dispatcher.addStartingActor(getGenerator());
 		dispatcher.addStartingActor(getMultiChecker());
 		dispatcher.addStartingActor(getFixer());
@@ -238,14 +235,17 @@ public class Model implements IStatisticsable, IExperimentable{
 
 	@Override
 	public void initForExperiment(double factor) {
-		// TODO Auto-generated method stub
-		
+		getMultiChecker().setNumberOfClones((int) factor);
+		getMultiChecker().setHistoForActorWaitingTime(histoWaitDevice);
 	}
 
 	@Override
 	public Map<String, Double> getResultOfExperiment() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Double> map = new HashMap<>();
+		map.put("Average queue size", discretHistoQueue.getAverage());
+		map.put("Queue waiting", /*histoTransactionWaitInQueue.max() -*/ histoTransactionWaitInQueue.getAverage());
+		map.put("Checker waiting", histoWaitDevice.getAverage());
+		return map;
 	}
 
-}
+}	

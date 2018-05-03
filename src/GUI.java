@@ -195,8 +195,9 @@ public class GUI {
 		panelRegres.setLayout(new CardLayout(0, 0));
 		
 		experimentManager = new ExperimentManager();
-		experimentManager.getChooseDataFactors().setText("2 3 4 5 6");
-		experimentManager.getChooseDataFactors().setTitle("Tester count");
+		experimentManager.getChooseDataFactors().setText("1 2 3 4 5");
+		experimentManager.getChooseDataFactors().setTitle("Checker count");
+		experimentManager.setFactory((d) -> new Model(d, this));
 		panelRegres.add(experimentManager, "name_72131731077853");
 
 		JPanel panelTrans = new JPanel();
@@ -264,7 +265,7 @@ public class GUI {
 
 		chooseData_fail_chance = new ChooseData();
 		chooseData_fail_chance.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chooseData_fail_chance.setText("0.5");
+		chooseData_fail_chance.setText("0.25");
 		chooseData_fail_chance.setTitle("Fail Chance");
 		panel.add(chooseData_fail_chance);
 
