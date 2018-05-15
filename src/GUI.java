@@ -17,6 +17,11 @@ import javax.swing.JCheckBox;
 import widgets.Diagram;
 import java.awt.Font;
 import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+
 
 import process.Dispatcher;
 import process.IModelFactory;
@@ -27,11 +32,18 @@ import rnd.Norm;
 import javax.swing.event.CaretEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import widgets.stat.StatisticsManager;
 import widgets.experiments.ExperimentManager;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
+
 
 public class GUI {
 	// test
@@ -56,6 +68,7 @@ public class GUI {
 	private StatisticsManager statisticsManager;
 	private IModelFactory factory;
 	private ExperimentManager experimentManager;
+	private JTextPane txtpnunknownpage;
 
 	/**
 	 * Launch the application.
@@ -111,11 +124,30 @@ public class GUI {
 		JPanel panelTZ = new JPanel();
 		tabbedPane.addTab("Technical Task", null, panelTZ, null);
 		GridBagLayout gbl_panelTZ = new GridBagLayout();
-		gbl_panelTZ.columnWidths = new int[] { 0 };
-		gbl_panelTZ.rowHeights = new int[] { 0 };
-		gbl_panelTZ.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panelTZ.rowWeights = new double[] { Double.MIN_VALUE };
+		gbl_panelTZ.columnWidths = new int[] { 0, 0 };
+		gbl_panelTZ.rowHeights = new int[] { 0, 0 };
+		gbl_panelTZ.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panelTZ.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panelTZ.setLayout(gbl_panelTZ);
+		
+		txtpnunknownpage = new JTextPane();
+		txtpnunknownpage.setContentType("text/html");
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner( new File("tz.html"),"UTF-8" );
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		String text = scanner.useDelimiter("\\A").next();
+		scanner.close(); // Put this call in a finally block
+		txtpnunknownpage.setText(text);
+		
+		GridBagConstraints gbc_txtpnunknownpage = new GridBagConstraints();
+		gbc_txtpnunknownpage.fill = GridBagConstraints.BOTH;
+		gbc_txtpnunknownpage.gridx = 0;
+		gbc_txtpnunknownpage.gridy = 0;
+		panelTZ.add(txtpnunknownpage, gbc_txtpnunknownpage);
 
 		panelTest = new JPanel();
 		panelTest.addComponentListener(new ComponentAdapter() {
