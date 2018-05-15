@@ -32,6 +32,9 @@ import rnd.Norm;
 import javax.swing.event.CaretEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -67,7 +70,7 @@ public class GUI {
 	private ExperimentManager experimentManager;
 	private TransProcessManager transProcessManager;
 	private JTextPane txtpnunknownpage;
-	//private JTextPane txtpnunknownpage;
+	
 
 	/**
 	 * Launch the application.
@@ -305,6 +308,29 @@ public class GUI {
 		chsdtTesterCount.setText("5");
 		panel.add(chsdtTesterCount);
 
+		
+		
+		
+		txtpnunknownpage = new JTextPane();
+				txtpnunknownpage.setContentType("text/html");
+				Scanner scanner = null;
+				try {
+					scanner = new Scanner( new File("tz.html"),"UTF-8" );
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				String text = scanner.useDelimiter("\\A").next();
+				scanner.close(); // Put this call in a finally block
+				txtpnunknownpage.setText(text);
+				
+				GridBagConstraints gbc_txtpnunknownpage = new GridBagConstraints();
+				gbc_txtpnunknownpage.fill = GridBagConstraints.BOTH;
+				gbc_txtpnunknownpage.gridx = 0;
+				gbc_txtpnunknownpage.gridy = 0;
+				panelTZ.add(txtpnunknownpage, gbc_txtpnunknownpage);
+		
+		
 	}
 
 	public Diagram getDiagram_Testing_Order() {
