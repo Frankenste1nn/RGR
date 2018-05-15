@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import widgets.stat.StatisticsManager;
 import widgets.experiments.ExperimentManager;
+import widgets.trans.TransProcessManager;
 
 public class GUI {
 	// test
@@ -56,6 +57,7 @@ public class GUI {
 	private StatisticsManager statisticsManager;
 	private IModelFactory factory;
 	private ExperimentManager experimentManager;
+	private TransProcessManager transProcessManager;
 
 	/**
 	 * Launch the application.
@@ -202,12 +204,13 @@ public class GUI {
 
 		JPanel panelTrans = new JPanel();
 		tabbedPane.addTab("Transient", null, panelTrans, null);
-		GridBagLayout gbl_panelTrans = new GridBagLayout();
-		gbl_panelTrans.columnWidths = new int[] { 0 };
-		gbl_panelTrans.rowHeights = new int[] { 0 };
-		gbl_panelTrans.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panelTrans.rowWeights = new double[] { Double.MIN_VALUE };
-		panelTrans.setLayout(gbl_panelTrans);
+		panelTrans.setLayout(new CardLayout(0, 0));
+		
+		transProcessManager = new TransProcessManager();
+		transProcessManager.setNumberOfInterval("20");
+		transProcessManager.setTextInterval("2");
+		transProcessManager.setFactory((d) -> new Model(d, this));
+		panelTrans.add(transProcessManager, "name_748833355178137");
 		splitPane.setDividerLocation(300);
 
 		chooseRandom_PC_Creation_time = new ChooseRandom();

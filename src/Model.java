@@ -13,8 +13,10 @@ import stat.Histo;
 import stat.IHisto;
 import widgets.experiments.IExperimentable;
 import widgets.stat.IStatisticsable;
+import widgets.trans.ITransMonitoring;
+import widgets.trans.ITransProcesable;
 
-public class Model implements IStatisticsable, IExperimentable{
+public class Model implements IStatisticsable, IExperimentable, ITransProcesable{
 	// Посилання на диспетчера
 	private Dispatcher dispatcher;
 	// Посилання на візуальну частину
@@ -243,8 +245,26 @@ public class Model implements IStatisticsable, IExperimentable{
 	public Map<String, Double> getResultOfExperiment() {
 		Map<String, Double> map = new HashMap<>();
 		map.put("Average queue size", discretHistoQueue.getAverage());
-		map.put("Queue waiting", /*histoTransactionWaitInQueue.max() -*/ histoTransactionWaitInQueue.getAverage());
+		map.put("Queue waiting", /*histoTransactionWaitInQueue.max() -*/ histoWaitDevice.getAverage());
 		map.put("Checker waiting", histoWaitDevice.getAverage());
+		return map;
+	}
+
+	@Override
+	public void initForTrans(double finishTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Map<String, ITransMonitoring> getMonitoringObjects() {
+		Map<String,  ITransMonitoring> map = new HashMap<>();
+		map.put("Check queue", getQueue());
+		System.out.println(getQueue().toString());
+		map.put("Fix queue", getFQueue());
+		System.out.println(getFQueue().toString());
+		map.put("Pack queue", getPQueue());
+		System.out.println(getPQueue().toString());
 		return map;
 	}
 
