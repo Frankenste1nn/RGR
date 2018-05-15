@@ -17,6 +17,11 @@ import javax.swing.JCheckBox;
 import widgets.Diagram;
 import java.awt.Font;
 import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+
 
 import process.Dispatcher;
 import process.IModelFactory;
@@ -33,6 +38,9 @@ import java.awt.CardLayout;
 import widgets.stat.StatisticsManager;
 import widgets.experiments.ExperimentManager;
 import widgets.trans.TransProcessManager;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
+
 
 public class GUI {
 	// test
@@ -58,6 +66,8 @@ public class GUI {
 	private IModelFactory factory;
 	private ExperimentManager experimentManager;
 	private TransProcessManager transProcessManager;
+	private JTextPane txtpnunknownpage;
+	//private JTextPane txtpnunknownpage;
 
 	/**
 	 * Launch the application.
